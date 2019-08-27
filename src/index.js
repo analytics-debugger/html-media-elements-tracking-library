@@ -14,7 +14,6 @@
     if (window.google_tag_manager && config.tms === 'gtm' && !config.dataLayer && config.datalayerVariableNames[0] === 'auto') {
         config.datalayerVariableNames = Object.entries(window.google_tag_manager).filter(e => { if (e[1].gtmDom) return e; }).map(e => e[0]);
     }
-    console.log(config);
 
     // Helper Function to check and element visibility within the viewport
     const elementIsVisible = function (elem) {
