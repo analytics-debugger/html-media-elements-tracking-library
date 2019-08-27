@@ -96,7 +96,6 @@
       // This event type is sent everytime the player updated it's current time,
       // We're using for the % of the video played.
       case 'timeupdate':
-        console.log(HTMLMediaElementStatus[e.target.id].progress_markers);
         Object.entries(HTMLMediaElementStatus[e.target.id].progress_markers).forEach((progressMarkers) => {
           const [k] = progressMarkers;
           if (pushModel.gtm[`${mediaType}Percent`] >= k && k > HTMLMediaElementStatus[e.target.id].greatest_marker) {
