@@ -24,8 +24,7 @@
     "prepublish:patch": "npm version patch --force && npm run build",
     "prepublish:minor": "npm version minor --force && npm run build",
     "prepublish:major": "npm version major --force && npm run build",
-    "publish:public": "npm publish --access public",
-
+    "publish:public": "npm publish --access public"
   },
   "files": [
     "dist"

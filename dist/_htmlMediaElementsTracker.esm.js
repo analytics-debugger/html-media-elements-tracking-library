@@ -27,9 +27,9 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
     if(config.debug){
       Function.apply.call(console.log, console, arguments);
     }    
-  } 
+  }; 
   
-  logDebug("[ADSLU::DEBUG] - @thyngster / HTML MEDIA ELEMENTS TRACKING", config)
+  logDebug("[ADSLU::DEBUG] - @thyngster / HTML MEDIA ELEMENTS TRACKING", config);
   // If the dataLayer Variable names is set to 'auto' let's find out the current
   // dataLayer Available in the page  
   if (window.google_tag_manager && config.tms.match(/gtm|gtag/)  && !config.dataLayer && config.datalayerVariableNames[0] === 'auto') {
@@ -68,15 +68,13 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
       case 'tealium': 
           if(window.utag && window.utag.link){
             window.utag.link(data);
-          }else{
+          }else {
             logDebug(`[ADSLU::DEBUG] - Defined TMS not found`);             
           }
           logDebug(`[ADSLU::DEBUG] - TEALIUM`, data); 
         break;
       case 'debug':
         logDebug(`[ADSLU::DEBUG - HTML Element Event]`, data);
-        break;
-      default:
         break;
     }
   };
@@ -123,7 +121,7 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
     element.addEventListener('seeked', eventHandler, false);
     element.addEventListener('volumechange', eventHandler, false);
     element.addEventListener('error', eventHandler, false);
-  }
+  };
   // Event Handler Function
   const eventHandler = (e) => {       
     const mediaType = e.target.nodeName.toLowerCase();
@@ -199,7 +197,7 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
         if (HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].state === "loaded") {
           HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].state = "playing";
           pushModel[`${prefix}${mediaType}Status`] = 'start';            
-        }else{
+        }else {
           skipEvent = !0;   
         }
                      
@@ -207,8 +205,7 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
       case 'pause':
         // Pause shouldn't be firing before ended or seeking events
         HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].state = "paused";
-        if (pushModel[`${prefix}${mediaType}Status`] !== 100 && e.target.seeking !== true && (Math.round(e.target.currentTime) !== Math.round(e.target.duration))) {           
-        }else{
+        if (pushModel[`${prefix}${mediaType}Status`] !== 100 && e.target.seeking !== true && (Math.round(e.target.currentTime) !== Math.round(e.target.duration))) ;else {
           skipEvent = !0;
         }
         HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].playEvent = true;
@@ -221,15 +218,13 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
         pushModel[`${prefix}${mediaType}ErrorCode`] = e.target.error.code;
         pushModel[`${prefix}${mediaType}ErrorMessage`] = e.target.error.message;
         break;
-      default:
-        break;
     }    
     if(!skipEvent) pushData(pushModel);    
   };
   
   const HTMLMediaElementStatus = {};
   const HTMLMediaElements = [...document.getElementsByTagName('audio'), ...document.getElementsByTagName('video')];  
-  logDebug(`[ADSLU::DEBUG] - FOUND ${Object.keys(HTMLMediaElements).length} ELEMENTS`, HTMLMediaElements)
+  logDebug(`[ADSLU::DEBUG] - FOUND ${Object.keys(HTMLMediaElements).length} ELEMENTS`, HTMLMediaElements);
   
   // Loop elements, fill the status info and set the listeners
   HTMLMediaElements.forEach((element) => {
@@ -259,4 +254,5 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
     }
   }
 };
+
 export default _htmlMediaElementsTracker;
