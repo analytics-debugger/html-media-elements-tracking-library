@@ -29,7 +29,7 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
     }    
   }; 
   
-  logDebug("[ADSLU::DEBUG] - @thyngster / HTML MEDIA ELEMENTS TRACKING", config);
+  logDebug("[ADSLU::DEBUG] - @analytics-debugger / HTML MEDIA ELEMENTS TRACKING", config);
   // If the dataLayer Variable names is set to 'auto' let's find out the current
   // dataLayer Available in the page  
   if (window.google_tag_manager && config.tms.match(/gtm|gtag/)  && !config.dataLayer && config.datalayerVariableNames[0] === 'auto') {
@@ -78,7 +78,7 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
         break;
     }
   };
-
+  // This function helps on adding the tracking to the elements.
   const processVideoElement = (element) => {
     if(element.getAttribute('data-html-media-element-tracked')) return;
     const elementTagId = Math.random().toString(36).slice(2);
@@ -183,13 +183,12 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
           }
         });
         
-        // current bucket hasn't been already sent to GA?, let's push it
+        // current bucket hasn't been already sent, let's push it
         if (HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker && !HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].progressMarkers[HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker]) {
           HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].progressMarkers[HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker] = true;
           pushModel[`${prefix}${mediaType}Status`] = 'progress';
           pushModel[`${prefix}${mediaType}Percent`] = parseInt(HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker);
         }
-
         break;
       case 'play':        
         HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].lastUpdateTime = new Date() * 1;
@@ -199,8 +198,7 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
           pushModel[`${prefix}${mediaType}Status`] = 'start';            
         }else {
           skipEvent = !0;   
-        }
-                     
+        }                     
         break;
       case 'pause':
         // Pause shouldn't be firing before ended or seeking events
@@ -231,7 +229,6 @@ _htmlMediaElementsTracker.init = (customSettings = {}) => {
     processVideoElement(element);
   });  
 
-  
   if(config.observe){
     logDebug(`[ADSLU::DEBUG - OBSERVER ENABLED]`);
     if (window.MutationObserver){
