@@ -1,6 +1,6 @@
 /*!
 * 
-*   @analytics-debugger/html-media-elements 0.0.1
+*   @analytics-debugger/html-media-elements 0.0.2
 *   https://github.com/analytics-debugger/html-media-elements-tracking-library
 *
 *   Copyright (c) David Vallejo (https://www.thyngster.com).
@@ -172,7 +172,7 @@ define(function () { 'use strict';
       }
     };
 
-    logDebug("[ADSLU::DEBUG] - @thyngster / HTML MEDIA ELEMENTS TRACKING", config); // If the dataLayer Variable names is set to 'auto' let's find out the current
+    logDebug("[ADSLU::DEBUG] - @analytics-debugger / HTML MEDIA ELEMENTS TRACKING", config); // If the dataLayer Variable names is set to 'auto' let's find out the current
     // dataLayer Available in the page  
 
     if (window.google_tag_manager && config.tms.match(/gtm|gtag/) && !config.dataLayer && config.datalayerVariableNames[0] === 'auto') {
@@ -230,7 +230,8 @@ define(function () { 'use strict';
           logDebug("[ADSLU::DEBUG - HTML Element Event]", data);
           break;
       }
-    };
+    }; // This function helps on adding the tracking to the elements.
+
 
     var processVideoElement = function processVideoElement(element) {
       if (element.getAttribute('data-html-media-element-tracked')) return;
@@ -322,7 +323,7 @@ define(function () { 'use strict';
             if (pushModel["".concat(prefix).concat(mediaType, "Percent")] >= k && k > HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker) {
               HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker = k;
             }
-          }); // current bucket hasn't been already sent to GA?, let's push it
+          }); // current bucket hasn't been already sent, let's push it
 
           if (HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker && !HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].progressMarkers[HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker]) {
             HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].progressMarkers[HTMLMediaElementStatus[e.target.dataset.htmlMediaElementId].greatest_marker] = true;

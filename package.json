@@ -1,6 +1,6 @@
 {
   "name": "@analytics-debugger/html-media-elements",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "HTML Media Elements - Track Audio/Video Media Elements Easily",
   "main": "dist/htmlMediaElementsTracker.min.js",
   "module": "dist/dist/htmlMediaElementsTracker.esm.min.js",
@@ -58,8 +58,6 @@
   "funding": {
     "type": "individual",
     "url": "https://ko-fi.com/thyngster"
-  },
-  "dependencies": {
-    "http-server": "^0.12.3"
   }
+  
 }
