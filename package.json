@@ -58,8 +58,6 @@
   "funding": {
     "type": "individual",
     "url": "https://ko-fi.com/thyngster"
-  },
-  "dependencies": {
-    "http-server": "^0.12.3"
   }
+  
 }
