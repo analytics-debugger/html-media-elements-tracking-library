@@ -102,26 +102,26 @@ The library will expose a public global variable at **"window._htmlMediaElements
   
 |Key|Value Example|Description|
 |--|--|--|
-|event|gtm.audio/gtm.video|Current Media Element Type|
-|Provider|html5|Fixed value, describes the current media element provider|
-|Status|start,pause,mute,unmute,progress, seek, completed, error|current media element event name|
-|Url|http://www.dom.com|Current Video Holding URL ( iframe url reported if it's the case)|
-|Title|Video Demo|Current video element data-media-element-title value, defaults to current video file name|
-|Duration|230|Media element duration in seconds|
-|CurrentTime|230|Media element current time in seconds|
-|ElapsedTime|230|Elapsed time since last pause/play event|
-|Percent|15|Media element current played %|
-|Visible|true\|false|Reports if the video is visible within the current browser viewport|
-|isMuted|true\|false|Is the current media element muted?|
-|PlaybackRate|1|Media Element PlaybackRate, default: 1|
-|Loop|true\|false|Is the video set to loop?|
-|Volume|0.8|Current Video Volume|
-|NetworkState||Network State|
-|Data|Object|List of custom video data coming from data-attributes tagging
-|elementClasses|""|Element Classes List|
-|elementId|""|Element Id|
-|elementTarget|""|Element Target|
-|elementUrl|""|Element URL|
+|**event**|gtm.audio/gtm.video|Current Media Element Type|
+|**Provider**|html5|Fixed value, describes the current media element provider|
+|**Status**|start,pause,mute,unmute,progress, seek, completed, error|current media element event name|
+|**Url**|http://www.dom.com|Current Video Holding URL ( iframe url reported if it's the case)|
+|**Title**|Video Demo|Current video element data-media-element-title value, defaults to current video file name|
+|**Duration**|230|Media element duration in seconds|
+|**CurrentTime**|230|Media element current time in seconds|
+|**ElapsedTime**|230|Elapsed time since last pause/play event|
+|**Percent**|15|Media element current played %|
+|**Visible**|true\|false|Reports if the video is visible within the current browser viewport|
+|**isMuted**|true\|false|Is the current media element muted?|
+|**PlaybackRate**|1|Media Element PlaybackRate, default: 1|
+|**Loop**|true\|false|Is the video set to loop?|
+|**Volume**|0.8|Current Video Volume|
+|**NetworkState**||Network State|
+|**Data**|Object|List of custom video data coming from data-attributes tagging
+|**elementClasses**|""|Element Classes List|
+|**elementId**|""|Element Id|
+|**elementTarget**|""|Element Target|
+|**elementUrl**|""|Element URL|
 
   
 
