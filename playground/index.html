@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Media Elements Tracker Playground</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .media-element {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    .controls {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 12px;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    #debug-output {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>HTML Media Elements Tracker </h1>
+  
+  <div class="container">
+    <div class="media-element">
+      <h2>Video Element</h2>
+      <video id="test-video" width="400" controls>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="media-element">
+      <h2>Audio Element</h2>
+      <audio id="test-audio" controls>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+
+    <div class="controls">
+      <h2>Testing Controls</h2>
+      <button id="init-tracker">Initialize Tracker</button>
+      <button id="clear-logs">Clear Debug Output</button>
+    </div>
+
+    <div id="debug-output">Debug output will appear here...</div>
+  </div>
+
+  <!-- Load your library from dist -->
+  <script src="../dist/htmlMediaElementsTracker.iife.min.js"></script>
+  
+  <script>
+    // Custom console.log to capture output
+    const originalConsoleLog = console.log;
+    console.log = function() {
+      // Call the original console.log
+      originalConsoleLog.apply(console, arguments);
+      
+      // Add to our debug output
+      const debugOutput = document.getElementById('debug-output');
+      const args = Array.from(arguments).map(arg => {
+        if (typeof arg === 'object') {
+          return JSON.stringify(arg, null, 2);
+        }
+        return arg;
+      });
+      
+      debugOutput.innerHTML += args.join(' ') + '\n';
+      
+      // Auto-scroll to bottom
+      debugOutput.scrollTop = debugOutput.scrollHeight;
+    };
+
+    // Initialize the tracker when the button is clicked
+    document.getElementById('init-tracker').addEventListener('click', function() {
+      console.log('Initializing HTML Media Elements Tracker...');
+      
+      // Initialize the tracker with debug mode
+      _htmlMediaElementsTracker.init({
+        debug: true,
+        tms: 'debug',
+        observe: true,
+        data_elements: true,
+        start: true,
+        play: true,
+        pause: true,
+        mute: true,
+        unmute: true,
+        complete: true,
+        seek: true,
+        progress: true,
+        progress_tracking_method: 'percentages',
+        progress_percentages: [25, 50, 75, 90]
+      });
+      
+      console.log('Tracker initialized!');
+    });
+
+    // Clear the debug output
+    document.getElementById('clear-logs').addEventListener('click', function() {
+      document.getElementById('debug-output').innerHTML = 'Debug output cleared...\n';
+    });
+
+    // Add custom data attribute to video
+    document.getElementById('test-video').setAttribute('data-html-media-element-paramTitle', 'Test Video');
+    document.getElementById('test-audio').setAttribute('data-html-media-element-paramTitle', 'Test Audio');
+
+    // Log when the page is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Test page loaded. Click "Initialize Tracker" to begin tracking media elements.');
+    });
+  </script>
+</body>
+</html>
